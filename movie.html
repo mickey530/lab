@@ -20,7 +20,7 @@
     }
 
     .form-body{
-        max-width: 300px;
+        max-width: 500px;
         position: absolute;
         width: 100%;
         padding: 10px;
@@ -61,14 +61,14 @@
             getDate(); // 날짜 가져오기
             requestUrl = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${Key}&targetDt=${getDt}`;
             $.getJSON(requestUrl, (data) => { 
-            let str = ""
+            let str = "<table class='table table-hover'>" 
             $(data).each(
                     function() {
                         for(var i = 0 ; i < this.boxOfficeResult.dailyBoxOfficeList.length; i++){
-                            str += "<div class='p-2'>"+(i+1) + "위 : " + this.boxOfficeResult.dailyBoxOfficeList[i].movieNm + "</div>";
+                            str += "<tr class='p-2'><td class='text-end'>"+(i+1) + "위</td><td>" + this.boxOfficeResult.dailyBoxOfficeList[i].movieNm + "</td></tr>";
                         }
                     });
-            
+            str += "</table>"
                 $("#movieDataDiv").html(str);
             })
         };
