@@ -39,10 +39,6 @@
     </div>
     <div id="movieDataDiv" class="row form-body"></div>
 
-
-
-
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         
     <script>
@@ -68,11 +64,17 @@
                             str += "<tr class='p-2'><td class='text-end'>"+(i+1) + "위</td><td>" + this.boxOfficeResult.dailyBoxOfficeList[i].movieNm + "</td></tr>";
                         }
                     });
-            str += "</table>"
+            str += "</table><button class='btn form-control' onclick='btn()'>닫기</button>"
                 $("#movieDataDiv").html(str);
+                $("#movieDataDiv").removeClass('visually-hidden');
+
             })
         };
-                
+        
+        function btn(){
+            $("#movieDataDiv").addClass('visually-hidden');
+            console.log("됨?")
+        }
                 
         
     </script>
