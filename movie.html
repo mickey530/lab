@@ -57,7 +57,7 @@
             getDate(); // 날짜 가져오기
             requestUrl = `http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key=${Key}&targetDt=${getDt}`;
             $.getJSON(requestUrl, (data) => { 
-            let str = "<table class='table table-hover'>" 
+            let str = "<table class='table table-hover bg-light'>" 
             $(data).each(
                     function() {
                         for(var i = 0 ; i < this.boxOfficeResult.dailyBoxOfficeList.length; i++){
