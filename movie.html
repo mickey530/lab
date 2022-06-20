@@ -62,7 +62,7 @@
                     function() {
                         for(var i = 0 ; i < this.boxOfficeResult.dailyBoxOfficeList.length; i++){
                             str += `<tr class='p-2' onclick="location.href='https://m.search.naver.com/search.naver?query=${this.boxOfficeResult.dailyBoxOfficeList[i].movieNm}'">`
-                                + `<td class='text-end'>${(i+1)}위</td><td>\${this.boxOfficeResult.dailyBoxOfficeList[i].movieNm}</td></tr>`;
+                                + `<td class='text-end'>${(i+1)}위</td><td>${this.boxOfficeResult.dailyBoxOfficeList[i].movieNm}</td></tr>`;
                         }
                     });
             str += "</table><button class='btn form-control' onclick='btn()'>닫기</button>"
