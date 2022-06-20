@@ -61,7 +61,7 @@
             $(data).each(
                     function() {
                         for(var i = 0 ; i < this.boxOfficeResult.dailyBoxOfficeList.length; i++){
-                            str += `<tr class='p-2' onclick='open(${this.boxOfficeResult.dailyBoxOfficeList[i].movieNm})'>`
+                            str += `<tr class='p-2' onclick="open('${this.boxOfficeResult.dailyBoxOfficeList[i].movieNm}')">`
                                 + `<td class='text-end'>${(i+1)}위</td><td>${this.boxOfficeResult.dailyBoxOfficeList[i].movieNm}</td></tr>`;
                         }
                     });
