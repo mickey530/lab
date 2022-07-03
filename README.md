@@ -8,5 +8,6 @@
 
 <ul>
   <li><a href="https://mickey530.github.io/lab/movie.html">1. 날짜별 영화 순위</a></li>
+  <li><a href="https://mickey530.github.io/lab/lotto.html">2. 로또 생성기</a></li>
 </ul>
 
