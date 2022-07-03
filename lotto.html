@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        .wrapper{
+            height: 100%;
+        }
+
+        .form-center{
+            height: inherit;
+            max-width: 390px;
+            position: absolute;
+            width: 100%;
+            padding: 10px;
+            top: 50%; /* 전체 높이 위에서부터 절반 */
+            left: 50%; /* 전체 넓이 왼쪽에서부터 절반 */
+            transform: translate(-50%, -50%); /* 해당 요소의 높이, 넓이의 절반만큼 돌아가기 */
+        }
+
+        input{
+            height: 50px;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+
+    
+    <main class="form-center">
+        
+          <h1 class="h3 mb-3 fw-normal">로또번호 생성기</h1>
+      
+            <input type="text" class="form-control">
+          <br>
+          <button class="w-100 btn btn-lg btn-primary" type="submit" onclick="getLottoNum()">생성</button>
+          <p class="mt-5 mb-3 text-muted">&copy; 어쩔코딩</p>
+
+      </main>
+      
+
+
+
+    <script>
+
+        // input 태그위치 form 변수에 저장
+        const form = document.querySelector(".form-control");
+        
+        // 1~45 랜덤 숫자 리턴 함수
+        function generate(){
+            randomNum = Math.floor(Math.random()*45+1);
+            return randomNum;
+        }
+
+        // 로또번호가 들어갈 빈 리스트 생성
+        let lottoNum = [];
+
+        // 반복문으로 숫자 6개 뽑기
+        function getLottoNum(){
+            lottoNum = [] // 이미 값이 들어있다면 비워주기
+            while(lottoNum.length != 6){ // 리스트 길이가 6이 될 때 까지 반복
+                num = generate(); // 난수 생성
+                if(!lottoNum.includes(num)){ // 리스트 내부에 해당 번호가 존재하는지 체크
+                    lottoNum.push(num); // 존재하지 않는다면 추가
+                } 
+            }
+            // lottoNum.sort() // 자바스크립트가 숫자가 아닌 아스키코드 문자로 인식하여 정렬함
+            
+            lottoNum.sort(function(a, b)  { 
+                if(a > b) return 1;
+                if(a === b) return 0;
+                if(a < b) return -1;
+            });
+
+            form.value = lottoNum;
+
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>
