@@ -51,8 +51,6 @@
 </head>
 <body>
     <div id="wrapper">
-        <h2 class="d-flex justify-content-center mt-2">가위, 바위, 보</h2>
-
         <div id="message"></div>
 
         <div id="content" class="justify-content-center form-center">
@@ -75,6 +73,7 @@
         let my = document.querySelector("#my");
         let button = document.querySelector("#button")
         let message = document.querySelector("#message");
+        message.innerHTML = "가위 바위 보";
         computer.innerHTML = startBtn;
         let againBtn = "<button onclick='again()' class='btn btn-lg btn-outline-success'>다시하기</button>";
 
