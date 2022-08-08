@@ -39,11 +39,19 @@
         transform: translate(-50%, 0%); /* 해당 요소의 높이, 넓이의 절반만큼 돌아가기 */
         text-align: center;
   }
+        #footer{
+        position: fixed;
+        width: 100%;
+        padding: 10px;
+        top: 90%;
+        transform: translate(0%, 0%); /* 해당 요소의 높이, 넓이의 절반만큼 돌아가기 */
+        text-align: center;
+  }
     </style>
 </head>
 <body>
     <div id="wrapper">
-        <h2 class="d-flex justify-content-center p">가위, 바위, 보</h2>
+        <h2 class="d-flex justify-content-center mt-2">가위, 바위, 보</h2>
 
         <div id="message"></div>
 
@@ -59,6 +67,7 @@
 
         </div>
     </div>
+    <p id="footer" class="text-muted footer">&copy; 어쩔코딩</p>
 
     <script>
         let startBtn = "<button onclick='start()' class='btn btn-lg btn-outline-primary'>시작하기</button>";
