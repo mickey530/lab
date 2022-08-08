@@ -67,7 +67,7 @@
 
         </div>
     </div>
-    <p id="footer" class="text-muted footer">&copy; 어쩔코딩</p>
+    <p id="footer" class="text-muted">&copy; 어쩔코딩</p>
 
     <script>
         let startBtn = "<button onclick='start()' class='btn btn-lg btn-outline-primary'>시작하기</button>";
@@ -85,7 +85,7 @@
         function start(){
             computer.innerHTML = "";
             message.innerHTML = "골라주세요<br/>👇";
-            my.innerHTML = rBtn + sBtn + pBtn;
+            button.innerHTML = rBtn + sBtn + pBtn;
         }
 
         function AISelect(){
@@ -136,10 +136,11 @@
         }
 
         function again(){
-            computer.innerHTML = startBtn;
+            computer.innerHTML = "";
             my.innerHTML = "";
             message.innerHTML = "";
             button.innerHTML = "";
+            start();
         }
 
 
