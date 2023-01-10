@@ -1,7 +1,7 @@
 # 어쩔코딩 저쩔실험실
 
 - 깃허브의 웹 호스팅(static-website) 기능을 사용하여
-- 데이터베이스 없이 HTML, CSS, JAVASCRIPT 만으로 기능하는 페이지
+- HTML, CSS, JAVASCRIPT 만으로 기능하는 페이지
 
 
 ### 현재 제공되는 서비스
