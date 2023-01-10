@@ -9,7 +9,7 @@ body{
     border-radius: 50%;
     background-color: white;
     position: absolute;
-    top: -8px;
+    top: -25px;
     animation: fall 10s linear;
 }
 
