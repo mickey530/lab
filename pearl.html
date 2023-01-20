@@ -23,6 +23,14 @@
             animation: fall 10s linear;
         }
 
+        @media (prefers-color-scheme: dark) {
+            body{ background:  #000; color: #fff; }
+        }
+
+        @media (prefers-color-scheme: light) {
+            body{ background: #fff; color:  #000; }
+        }
+
         @keyframes fall{
             from{
 
@@ -37,6 +45,10 @@
 </head>
 <body>
     <script>
+
+        const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+        
         const body = document.querySelector("body")
         const MIN_DURATION = 10;
 
