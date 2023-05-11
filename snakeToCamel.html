@@ -116,7 +116,7 @@
     // setStr
     function setStr(str){
         const setXml = `<result column="#{snake}" property="#{camel}"/>`;
-        const setDto = `@Schema(description = "#{snake}, example = "", hidden = true)\nprivate String #{camel};\n`;
+        const setDto = `@Schema(description = "#{snake}", example = "", hidden = true)\nprivate String #{camel};\n`;
         const textArea = document.querySelector("#output-form");
         switch(str) {
             case "xml":
