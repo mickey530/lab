@@ -24,40 +24,154 @@
             left: 6px;
         }
 
+        .dtoxmlheader{
+            width: 250px;
+            justify-content: space-between
+        }
+
 
     </style>
 </head>
 <body>
+    <header class="sticky-top">
+        <div class="row d-flex text-center">
+            <h2 class="text-bg-success p-2 fw-bold">Converter</h2>
+        </div>
+    </header>
+
     <div class="container">
         <div class="row">
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                  <h5 class="card-title mb-0">SNAKE_CASE</h5>
-                  <button class="btn btn-sm btn-outline-secondary copyBtn" onclick="copyToClipboard('snake-case')">Copy</button>
+            <div class="col-md-12">
+                <div class="card mb-3">
+                  <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">SELECT</h5>
+                    <button class="btn btn-sm btn-outline-secondary copyBtn" onclick="copyToClipboard('select')">Copy</button>
+                  </div>
+                  <div class="card-body">
+                    <textarea id="select" class="form-control" rows="8" placeholder="ex. snake_case, camel_case"></textarea>
+                  </div>
                 </div>
-                <div class="card-body">
-                  <textarea id="snake-case" class="form-control" rows="8" placeholder="SNAKE_CASE"></textarea>
+                <div class="card">
+                  <div class="card-header d-flex justify-content-between align-items-center">
+                    <div class="d-flex dtoxmlheader">
+                        <h5 class="card-title mb-0 mr-4">OUTPUT FORM</h5>
+                        <button class="btn btn-sm btn-outline-primary" onclick="setStr('dto')">DTO</button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="setStr('xml')">XML</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-sm btn-outline-secondary copyBtn" onclick="copyToClipboard('output-form')">Copy</button>
+                    </div>
+                  </div>
+                  <div class="card-body">
+                    <textarea id="output-form" class="form-control" rows="4" placeholder="ex. #{snake}, #{camel}"></textarea>
+                  </div>
                 </div>
               </div>
+            <div class="col-md-12">
+                <button class="btn btn-outline-success mt-3 mb-3 w-100" type="button" onclick="strToArr()">Convert</button>
             </div>
-            <div class="col-md-6">
-              <div class="card">
-                <div class="card-header d-flex justify-content-between align-items-center">
-                  <h5 class="card-title mb-0">CAMEL_CASE</h5>
-                  <button class="btn btn-sm btn-outline-secondary copyBtn" onclick="copyToClipboard('camel-case')">Copy</button>
+
+            <div class="col-md-12 mb-1 mt-1">
+                <div class="card">
+                  <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">OUTPUT</h5>
+                    <button class="btn btn-sm btn-outline-secondary copyBtn" onclick="copyToClipboard('output')">Copy</button>
+                  </div>
+                  <div class="card-body">
+                    <textarea id="output" class="form-control" rows="8" placeholder="ex. snakeCase, camelCase"></textarea>
+                  </div>
                 </div>
-                <div class="card-body">
-                  <textarea id="camel-case" class="form-control" rows="8" placeholder="CAMEL_CASE" disabled></textarea>
-                </div>
-              </div>
             </div>
-          </div>
+            
+        </div>
           
           
     </div>
       
       
-      
+    
+<script>
+    let snakeCase = [];
+    let camelCase = [];
+    let result = "";
+
+
+    // 복사버튼
+    function copyToClipboard(elementId) {
+        const element = document.querySelector(`#${elementId}`);
+        element.select();
+        try {
+            document.execCommand("copy");
+            const button = event.target;
+            const originalText = "Copy";
+            button.classList.add("active");
+            button.innerText = "✓ Copied";
+            setTimeout(() => button.innerText = originalText, 2000);
+            setTimeout(() => button.classList.remove("active"), 2000);
+        } catch (err) {
+            console.error("복사 실패!");
+        }
+    }
+    
+    // setStr
+    function setStr(str){
+        const setXml = `<result column="#{snake}" property="#{camel}"/>`;
+        const setDto = `@Schema(description = "#{snake}, example = "", hidden = true)\nprivate String #{camel};`;
+        const textArea = document.querySelector("#output-form");
+        switch(str) {
+            case "xml":
+                textArea.value = setXml
+                break;
+            case "dto":
+                textArea.value = setDto
+                break;
+
+            default:
+                // 실행될 코드
+            }
+
+    }
+
+
+    // textarea 내용 array로 저장
+    function strToArr(){
+    const selectStr = document.querySelector("#select").value.split(/,\s*/);
+    const tempStr1 = selectStr.map((c) => {
+        if (c.match(/__c$/)) {
+            return c.slice(0, -3);
+        } else {
+            return c;
+        }
+    });
+
+    snakeCase = tempStr1;
+    console.log(snakeCase);
+
+    const tempStr2 = snakeCase.map((str) => {
+    return str.replace(/_(\w)/g, (match, p1) => p1.toUpperCase());
+    });
+
+    camelCase = tempStr2;
+    console.log(camelCase);
+
+    result = convert();
+
+    console.log(result);
+
+    document.querySelector("#output").value = result;
+
+    }
+
+    const convert = ()=>{
+        let resultStr = ""; 
+        const outputForm = document.querySelector("#output-form").value;
+        for(i in snakeCase){
+            let tempStr = outputForm.replace("#{snake}", snakeCase[i]).replace("#{camel}", camelCase[i])
+            resultStr += tempStr + "\n";
+        }
+        return resultStr;
+    }
+</script>  
 </body>
 </html>
+
