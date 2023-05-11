@@ -145,18 +145,18 @@
     });
 
     snakeCase = tempStr1;
-    console.log(snakeCase);
+    // console.log(snakeCase);
 
     const tempStr2 = snakeCase.map((str) => {
     return str.replace(/_(\w)/g, (match, p1) => p1.toUpperCase());
     });
 
     camelCase = tempStr2;
-    console.log(camelCase);
+    // console.log(camelCase);
 
     result = convert();
 
-    console.log(result);
+    // console.log(result);
 
     document.querySelector("#output").value = result;
 
