@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous" />
+    <title>내 인생이 달라졌다</title>
+    <style>
+      .container {
+        margin-top: 50px;
+      }
+
+      #camel-case {
+        background-color: white;
+      }
+
+      .form-control {
+        border: none;
+      }
+
+      .copyBtn {
+        left: 6px;
+      }
+
+      .dtoxmlheader {
+        width: 250px;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="sticky-top">
+      <div class="row d-flex text-center">
+        <h2 class="text-bg-success p-2 fw-bold">What I bought</h2>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card mb-3">
+            <div
+              class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">INPUT</h5>
+            </div>
+            <div class="card-body">
+              <input id="item" class="form-control" placeholder="ex. 아이폰" />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <button
+            class="btn btn-success mt-3 mb-3 w-100"
+            type="button"
+            onclick="convert()">
+            Convert
+          </button>
+        </div>
+
+        <div class="col-md-12 mb-1 mt-1">
+          <div class="card">
+            <div
+              class="card-header d-flex justify-content-between align-items-center">
+              <h5 class="card-title mb-0">OUTPUT</h5>
+              <button
+                class="btn btn-sm btn-outline-secondary copyBtn"
+                onclick="copyToClipboard('output')">
+                Copy
+              </button>
+            </div>
+            <div class="card-body">
+              <textarea
+                id="output"
+                class="form-control"
+                rows="12"
+                placeholder="ex. 아이폰을 사고나서 내 인생이 달라졌다."></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 복사버튼
+      function copyToClipboard(elementId) {
+        const element = document.querySelector(`#${elementId}`);
+        element.select();
+        try {
+          document.execCommand("copy");
+          const button = event.target;
+          const originalText = "Copy";
+          button.classList.add("active");
+          button.innerText = "✓ Copied";
+          setTimeout(() => (button.innerText = originalText), 2000);
+          setTimeout(() => button.classList.remove("active"), 2000);
+        } catch (err) {
+          console.error("복사 실패!");
+        }
+      }
+
+      // 목적격 조사 체크 함수
+      function attachCaseParticle(noun) {
+        // 입력된 명사가 한국어인지 확인
+        const isKorean = /[ㄱ-ㅎㅏ-ㅣ가-힣]/.test(noun);
+
+        // 조사 체크
+        let caseParticle = "";
+        if (isKorean) {
+          const lastChar = noun.charAt(noun.length - 1);
+          const lastCharCode = lastChar.charCodeAt(0);
+          const hasJongseong = (lastCharCode - 0xac00) % 28 > 0;
+          caseParticle = hasJongseong ? "을" : "를";
+        } else {
+          caseParticle = "을(를)";
+        }
+
+        // 조사를 반환
+        return caseParticle;
+      }
+
+      // 결과물 출력 버튼
+      const convert = () => {
+        // 입력받은 문자
+        let item = document.querySelector("#item").value;
+
+        // 문자에 맞는 조사
+        let particle = attachCaseParticle(item);
+
+        // 출력 폼
+        let outputForm = `확실히 ${item}${particle} 사고 나서 내 인생이 달라졌다.
+
+
+원래는 고딩때 일진 눈도 못마주치고
+
+쓰레기 아무데나 버리고 침 찍찍 뱉고 했는데,
+
+
+${item} 오너가 되고나니깐 품위유지 할려고 스스로 노력할려고한다.
+
+방금도 길바닥에 포스틱봉지 버려져있길래 주워서 쓰레기통에 버리고왔다.
+
+학생때는 일진은 커녕 같은 찐따 눈도 못마주쳤는데 이제는 배달음식 주문할때도 큰 소리로 또박또박말하고,
+
+편의점 피시방에서도 알바생이랑 눈마주치기 가능해졋다
+
+아무리 기분 좆같은 일이 생겨도
+
+샤워하면서 혼자 나는 누구?
+
+
+"${item} 오너"
+
+
+하면서 웃으니깐 기분도 좋아지네
+
+
+이래서 자리가 사람을 만든다는말이 나온거같다.`;
+
+        document.querySelector("#output").value = outputForm;
+      };
+    </script>
+  </body>
+</html>
